@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { TYPE_TODO_FILTER } from '../store/types/todo'
+import { filterTaskByTitleAction } from '../store/action/todo'
 
-function TodoFilter({filterTask}) {
+function TodoFilter({ filterTask }) {
     const handelchange = (e) => {
         filterTask(e.target.value)
     }
@@ -15,10 +15,11 @@ function TodoFilter({filterTask}) {
         </div>
     )
 }
-const TodoFilterStore = connect(null, (dispatch) => ({
-    filterTask:querry =>dispatch ({
-        type : TYPE_TODO_FILTER,
-        payload: {querry}
-    })  }))
+const TodoFilterStore = connect(null,
+    (dispatch) => ({
+        filterTask: querry =>
+        dispatch(filterTaskByTitleAction(querry))
+    })
+)
 
 export default TodoFilterStore(TodoFilter)

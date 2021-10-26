@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { TYPE_TODO_CHECK, TYPE_TODO_DELETE } from '../store/types/todo'
+import { onDeleteAction , toogleTaskAction } from '../store/action/todo'
 import TodoItem from './TodoItem'
 
 function TodoList({ todos = [], onDelete, toogleTask }) {
@@ -20,14 +20,10 @@ const TodoListStore = connect((state) => ({
     todos: state.todos
 }),
     (dispatch) => ({
-        toogleTask: taskId => dispatch({
-            type: TYPE_TODO_CHECK,
-            payload: { taskId }
-        }),
-        onDelete: taskId => dispatch({
-            type: TYPE_TODO_DELETE,
-            payload: { taskId }
-        }),
+        onDelete: taskId =>
+            dispatch(onDeleteAction(taskId)),
+        toogleTask: taskId =>
+            dispatch(toogleTaskAction(taskId)),
     }),
 
 )
